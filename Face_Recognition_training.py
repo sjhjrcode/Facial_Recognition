@@ -1,9 +1,13 @@
+#Currently not finished
+
 import tensorflow as tf
 
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-
+from imutils.video import VideoStream
+import argparse
+import imutils
 import os
 import glob
 import time
@@ -11,11 +15,15 @@ import face_recognition
 import cv2
 
 
-base_dir = "/home/sjhjrok/Documents/Code/Face_Recognition/dataset/"
 
+base_dir = "/home/sjhjrok/Documents/Facial_Recognition/dataset/"
+
+
+'''
+#behavior is strange detecting faces but not taking pictures will try with a similar but diffrent method. 
 
 vid_cam = cv2.VideoCapture(0)
-face_detector = cv2.CascadeClassifier('./OpenCV/haarcascades/haarcascade_frontalface_default.xml')
+face_detector = cv2.CascadeClassifier("/home/sjhjrok/Documents/Facial_Recognition/OpenCV/haarcascades/haarcascade_frontalface_default.xml")
 face_id = 1
 count = 0
 while(vid_cam.isOpened()):
@@ -33,6 +41,12 @@ while(vid_cam.isOpened()):
         break
 vid_cam.release()
 cv2.destroyAllWindows()
+'''
+
+
+
+
+
 
 
 
