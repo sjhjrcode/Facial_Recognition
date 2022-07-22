@@ -13,44 +13,63 @@ import glob
 import time
 import face_recognition
 import cv2
+input_string = []
+
+while True:
+    temp_input = (input("Enter User Name for Face Recognitoin. Type q when finised\n"))
+    if temp_input=='q':
+        break
+    input_string.append(temp_input)
+
+
+base_dir = "./dataset/"
+if((os.path.exists(base_dir))):
+    print("dataset file exists")
+else:
+    os.makedirs(base_dir)
+#user_dataset = "dataset/Steven/User."
+user_dataset = []
+str_temp = ""
+for string in input_string:
+    #print(input_string[0])
+    str_temp = string
+    print(str_temp)
+    temp_dir = base_dir+str_temp
+    print(temp_dir)
+    user_dataset.append(temp_dir)
 
 
 
-base_dir = "/home/sjhjrok/Documents/Facial_Recognition/dataset/"
-
-
-'''
+for string2 in user_dataset:
+    if((os.path.exists(string2))):
+        print("dataset file exists")
+    else:
+        os.makedirs(string2)
 #behavior is strange detecting faces but not taking pictures will try with a similar but diffrent method. 
 
 vid_cam = cv2.VideoCapture(0)
-face_detector = cv2.CascadeClassifier("/home/sjhjrok/Documents/Facial_Recognition/OpenCV/haarcascades/haarcascade_frontalface_default.xml")
+face_detector = cv2.CascadeClassifier("./opencv/data/haarcascades/haarcascade_frontalface_default.xml")
 face_id = 1
 count = 0
 while(vid_cam.isOpened()):
     ret, image_frame = vid_cam.read()
     gray = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY)
     faces = face_detector.detectMultiScale(gray, 1.3, 5)
-    for (x,y,w,h) in faces:
-        cv2.rectangle(image_frame, (x,y), (x+w,y+h), (255,0,0), 2)
-        count += 1
-        cv2.imwrite("dataset/Steven/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
-        cv2.imshow('frame', image_frame)
-    if cv2.waitKey(100) & 0xFF == ord('q'):
+    for string2 in user_dataset:
+        for (x,y,w,h) in faces:
+            cv2.rectangle(image_frame, (x,y), (x+w,y+h), (255,0,0), 2)
+            count += 1
+            cv2.imwrite(string2+"/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+            cv2.imshow('frame', image_frame)
+            if cv2.waitKey(100) & 0xFF == ord('q'):
+                break
+            elif count>100:
+                break
+    if count>100:
         break
-    elif count>100:
-        break
+
 vid_cam.release()
 cv2.destroyAllWindows()
-'''
-
-
-
-
-
-
-
-
-
 """
     # Use `ImageDataGenerator` to rescale the images.
     # Create the train generator and specify where the train dataset directory, image size, batch size.
