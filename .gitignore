@@ -2,3 +2,4 @@ opencv
 dataset
 labels.txt
 save
+label_map.pbtxt
